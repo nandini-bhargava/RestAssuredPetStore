@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <!-- Define the base path for logs -->
+        <Property name="basePath">./logs</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- Console Appender: Outputs logs to the console -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <!-- RollingFile Appender: Writes logs to a file with rolling policies -->
+        <RollingFile name="File" fileName="${basePath}/automation.log" 
+                     filePattern="${basePath}/automation-%d{yyyy-MM-dd-HH-mm}.log.gz">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <!-- Triggers file rollover based on size -->
+                <SizeBasedTriggeringPolicy size="50MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- Root Logger: Defines the log level and appenders -->
+        <Root level="info">
+            <AppenderRef ref="File"/>
+            <!-- Uncomment the line below to enable console logging -->
+            <!-- <AppenderRef ref="Console"/> -->
+        </Root>
+    </Loggers>
+</Configuration>
